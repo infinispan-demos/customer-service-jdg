@@ -1,0 +1,19 @@
+spring:
+  main:
+    show_banner: false
+  mvc:
+    favicon:
+      enabled: false
+    jmx:
+      enabled: true
+  cache:
+    type: infinispan
+    infinispan:
+      config: infinispan-local.xml
+  session:
+    store-type: none
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /v2/api-docs
