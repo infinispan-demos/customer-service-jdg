@@ -22,6 +22,7 @@
 		<java.version>1.8</java.version>
 		<springfox.version>2.6.1</springfox.version>
 		<infinispan.version>8.4.0.ER6-redhat-1</infinispan.version><!-- JDG 7.1.0 Beta -->
+        <infinispan.starters.version>1.0.0.CR1</infinispan.starters.version>
 	</properties>
 
 	<dependencies>
@@ -35,12 +36,25 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency-->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	
+	    <!--  JDG Spring Boot Starter Test -->
+        <!--  dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-client-hotrod</artifactId>
+            <version>${infinispan.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-spring-boot-starter</artifactId>
+            <version>${infinispan.starters.version}</version>
+        </dependency-->
+
 	    <!-- JDG Spring Cache -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
@@ -53,11 +67,24 @@
 		    <version>${infinispan.version}</version>
 		</dependency>
 
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-client-hotrod</artifactId>
+            <version>${infinispan.version}</version>
+        </dependency>
+
+		<dependency>
+		    <groupId>org.infinispan</groupId>
+		    <artifactId>infinispan-spring4-remote</artifactId>
+		    <version>${infinispan.version}</version>
+		</dependency>
+		
 		<dependency>
 		    <groupId>org.infinispan</groupId>
 		    <artifactId>infinispan-spring4-embedded</artifactId>
+		    <version>${infinispan.version}</version>
 		</dependency>
-		
+
 		<!-- Swagger docs -->
 		<dependency>
 			<groupId>io.springfox</groupId>

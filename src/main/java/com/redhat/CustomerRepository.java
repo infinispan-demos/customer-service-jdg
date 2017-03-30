@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-@CacheConfig(cacheNames="customer")
+@CacheConfig(cacheNames="default")
 public class CustomerRepository {
     Logger log = LoggerFactory.getLogger(this.getClass());
 

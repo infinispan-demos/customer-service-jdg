@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ImportResource;
 
 import com.google.common.base.Predicate;
 
@@ -18,10 +19,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableCaching
 @EnableSwagger2
+@ImportResource("classpath:infinispan-cache.xml")
 public class CustomerServiceJDGApplication {
-
+	
 	static Logger logger = LoggerFactory.getLogger(CustomerServiceJDGApplication.class);
-    
+	
 	public static void main(String[] args) {
         try {
 		SpringApplication.run(CustomerServiceJDGApplication.class, args);
