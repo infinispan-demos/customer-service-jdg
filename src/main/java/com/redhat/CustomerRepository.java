@@ -18,7 +18,7 @@ public class CustomerRepository {
 
     @Cacheable(key="#id")
     public Customer findById(UUID id){
-    	return new Customer(id); 	
+    	return null; 	
     }
 
     @CachePut(key="#id")
@@ -29,5 +29,6 @@ public class CustomerRepository {
     @CacheEvict(key="#id")
     public void delete(UUID id){
     }
+    
 
 }

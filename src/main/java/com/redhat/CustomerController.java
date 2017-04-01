@@ -22,7 +22,7 @@ public class CustomerController {
     		) {
     	Customer c = repository.findById(id);
     	
-    	if (c.getFirstName()==null && c.getLastName()==null && c.getEmail()==null){
+    	if (c ==null){
     		throw new CustomerNotFoundException();
     	}
     	
@@ -44,6 +44,30 @@ public class CustomerController {
     	repository.delete(id);
     }
 
+    
+    @RequestMapping(method=RequestMethod.POST,value="/customer")
+    public Customer updateCustomer(
+    		@RequestParam(value="id") UUID id,
+    		@RequestParam(value="first-name", required = false) String firstName,
+    		@RequestParam(value="last-name", required = false) String lastName,
+    		@RequestParam(value="email", required = false) String email
+    		) {
+    	Customer c_cache = repository.findById(id);
+    	
+    	if (c_cache == null){
+    		throw new CustomerNotFoundException();
+       	}
+    		
+        Customer c_update = repository.insert(
+        		id, 
+        		(firstName!=null)?firstName:c_cache.getFirstName(), 
+        		(lastName!=null)?lastName:c_cache.getLastName(), 
+        		(email!=null)?email:c_cache.getEmail());
+        
+    	return c_update;
+    }
+    
+    
     @ResponseStatus(value=HttpStatus.NOT_FOUND,reason="This customer is not found in the system")
     public class CustomerNotFoundException extends RuntimeException 
     {

@@ -21,14 +21,6 @@ public class Customer implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        
-        log.info("Added Customer Id:" + this.id);
-    }
-
-    public Customer(UUID id) {
-        this.id = UUID.randomUUID();
-        
-        log.info("Loaded Customer Id:" + this.id);
     }
     
 	public UUID getId() {
@@ -62,26 +54,5 @@ public class Customer implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-    
-	/*
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-
-		Customer cust = (Customer) o;
-
-		return this.id.equals(cust.id);
-	}
-
-	@Override
-	public int hashCode() {
-		return this.id.hashCode();
-	}
-    */
-	
+    	
 }
