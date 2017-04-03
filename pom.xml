@@ -84,6 +84,12 @@
 		    <artifactId>infinispan-spring4-embedded</artifactId>
 		    <version>${infinispan.version}</version>
 		</dependency>
+		
+		<dependency>
+    		<groupId>javax.cache</groupId>
+    		<artifactId>cache-api</artifactId>
+    		<version>1.0.0.redhat-1</version>
+		</dependency>
 
 		<!-- Swagger docs -->
 		<dependency>

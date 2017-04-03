@@ -3,6 +3,7 @@ package com.redhat;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,9 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CustomerController {
-
+	
 	@Autowired
-	private CustomerRepository repository;
+//	@Qualifier(value = "JSR-107")
+	private CustomerRepositoryCache repository;
 	
     @RequestMapping(method=RequestMethod.GET,value="/customer")
     public Customer getCustomer(
@@ -35,7 +37,8 @@ public class CustomerController {
     		@RequestParam(value="last-name") String lastName,
     		@RequestParam(value="email") String email
     		) {
-         return repository.insert(UUID.randomUUID(), firstName, lastName, email);
+    	 UUID id = UUID.randomUUID();
+         return repository.insert(id, new Customer(id,firstName, lastName, email));
     }
 
     @RequestMapping(method=RequestMethod.DELETE,value="/customer")
@@ -59,10 +62,12 @@ public class CustomerController {
        	}
     		
         Customer c_update = repository.insert(
-        		id, 
-        		(firstName!=null)?firstName:c_cache.getFirstName(), 
-        		(lastName!=null)?lastName:c_cache.getLastName(), 
-        		(email!=null)?email:c_cache.getEmail());
+        		id, new Customer(
+        				id,
+        				(firstName!=null)?firstName:c_cache.getFirstName(), 
+        				(lastName!=null)?lastName:c_cache.getLastName(), 
+        				(email!=null)?email:c_cache.getEmail())
+        		);
         
     	return c_update;
     }
