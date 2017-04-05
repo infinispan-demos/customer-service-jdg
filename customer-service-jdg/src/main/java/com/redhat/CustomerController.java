@@ -3,7 +3,6 @@ package com.redhat;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerController {
 	
 	@Autowired
-//	@Qualifier(value = "JSR-107")
 	private CustomerRepositoryCache repository;
 	
     @RequestMapping(method=RequestMethod.GET,value="/customer")

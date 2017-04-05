@@ -1,3 +1,6 @@
+server:
+  port: 8080
+  contextPath: /customer-service-jdg
 spring:
   main:
     banner-mode: 'off'
@@ -22,3 +25,8 @@ springfox:
 #    enabled: true
 #    server-list: 192.168.99.100:11222
 #    client-properties: hotrod-client.properties
+logging:
+  level:
+    org:
+      jgroups:
+        protocols: WARN

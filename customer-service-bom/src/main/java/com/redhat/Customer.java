@@ -1,14 +1,10 @@
 package com.redhat;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.Serializable;
 import java.util.UUID;
 
 @SuppressWarnings("serial")
 public class Customer implements Serializable {
-    Logger log = LoggerFactory.getLogger(this.getClass());
 
 	private UUID id;
 	

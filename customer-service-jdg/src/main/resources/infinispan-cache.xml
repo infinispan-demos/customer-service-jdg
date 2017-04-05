@@ -11,9 +11,9 @@
 
 	<cache:annotation-driven/>
 
-	<!--  infinispan:remote-cache-manager configuration="classpath:hotrod-client.properties"/-->
-	<infinispan:embedded-cache-manager configuration="classpath:local-cache-config.xml"/>
+	<infinispan:remote-cache-manager configuration="classpath:hotrod-client.properties"/>
+	<!-- infinispan:embedded-cache-manager configuration="classpath:local-cache-config.xml"/-->
 
-	<!-- bean id="repository" class="com.redhat.CustomerRepositorySpringCache"/-->
-	<bean id="repository" class="com.redhat.CustomerRepositoryJCache"/>
+	<bean id="repository" class="com.redhat.CustomerRepositorySpringCache"/>
+	<!-- bean id="repository" class="com.redhat.CustomerRepositoryJCache"/-->
 </beans>

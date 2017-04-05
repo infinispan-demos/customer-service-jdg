@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Qualifier("JSR-107") 
-@CacheDefaults(cacheName="jsr-107-default")
+@CacheDefaults(cacheName="default")
 public class CustomerRepositoryJCache implements CustomerRepositoryCache{
     Logger log = LoggerFactory.getLogger(this.getClass());
 
