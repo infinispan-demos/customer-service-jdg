@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<springfox.version>2.6.1</springfox.version>
-		<infinispan.version>8.4.0.Final-redhat-2</infinispan.version>
+		<infinispan.version>8.4.0.Final-redhat-2</infinispan.version><!-- JDG 7.1.0 Beta -->
 		<infinispan.starters.version>1.0.0.CR1</infinispan.starters.version>
 	</properties>
 
