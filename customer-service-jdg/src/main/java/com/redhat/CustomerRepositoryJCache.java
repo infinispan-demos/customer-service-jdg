@@ -1,7 +1,5 @@
 package com.redhat;
 
-import java.util.UUID;
-
 import javax.cache.annotation.CacheDefaults;
 import javax.cache.annotation.CacheKey;
 import javax.cache.annotation.CachePut;
@@ -22,17 +20,17 @@ public class CustomerRepositoryJCache implements CustomerRepositoryCache{
     Logger log = LoggerFactory.getLogger(this.getClass());
 
     @CacheResult
-    public Customer findById(@CacheKey UUID id){
+    public Customer findById(@CacheKey String id){
     	return null; 	
     }
 
     @CachePut
-    public Customer insert(@CacheKey UUID id, @CacheValue Customer c){
+    public Customer insert(@CacheKey String id, @CacheValue Customer c){
         return c;
     }
     
     @CacheRemove
-    public void delete(@CacheKey UUID id){
+    public void delete(@CacheKey String id){
     }
     
 

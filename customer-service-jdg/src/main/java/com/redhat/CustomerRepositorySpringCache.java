@@ -1,7 +1,5 @@
 package com.redhat;
 
-import java.util.UUID;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,17 +17,17 @@ public class CustomerRepositorySpringCache implements CustomerRepositoryCache {
     Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Cacheable(key="#id")
-    public Customer findById(UUID id){
+    public Customer findById(String id){
     	return null; 	
     }
 
     @CachePut(key="#id")
-    public Customer insert(UUID id, Customer c){
+    public Customer insert(String id, Customer c){
         return c;
     }
     
     @CacheEvict(key="#id")
-    public void delete(UUID id){
+    public void delete(String id){
     }
     
 

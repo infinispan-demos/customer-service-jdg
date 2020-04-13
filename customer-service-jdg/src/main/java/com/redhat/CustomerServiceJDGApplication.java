@@ -10,15 +10,13 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 
-import com.google.common.base.Predicate;
-
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @SpringBootApplication
 @EnableCaching
-@EnableSwagger2
+@EnableSwagger2WebMvc
 @ImportResource("classpath:infinispan-cache.xml")
 public class CustomerServiceJDGApplication {
 	
@@ -36,12 +34,7 @@ public class CustomerServiceJDGApplication {
     public Docket swaggerSpringMvcPlugin() {
         return new Docket(DocumentationType.SWAGGER_2)
         		.select()
-        			.paths(paths())
+        			.paths(regex("/customer.*"))
         			.build();       	        
-    }
-    
-    private Predicate<String> paths() {
-        return 
-            regex("/customer.*");
-      }
+    }   
 }

@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.redhat</groupId>
-	<artifactId>customer-service-jdg</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>customer-service-browser</artifactId>
+	<version>0.0.2-SNAPSHOT</version>
 
-	<name>customer-service-jdg</name>
+	<name>customer-service-browser</name>
 	<description>MSA Demo</description>
 	<packaging>jar</packaging>
 
@@ -20,17 +20,17 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-		<springfox.version>2.6.1</springfox.version>
-		<infinispan.version>8.4.0.Final-redhat-2</infinispan.version><!-- JDG 7.1.0 Beta -->
-		<infinispan.starters.version>1.0.0.CR1</infinispan.starters.version>
+		<java.version>11</java.version>
+		<springfox.version>3.0.0-SNAPSHOT</springfox.version>
+		<infinispan.version>10.1.5.Final-redhat-00001</infinispan.version>
+		<spring.plugin.core>2.0.0.RELEASE</spring.plugin.core>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.redhat</groupId>
 			<artifactId>customer-service-bom</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -46,12 +46,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- JDG Spring Boot Starter Test -->
-		<!-- dependency> <groupId>org.infinispan</groupId> <artifactId>infinispan-client-hotrod</artifactId> 
-			<version>${infinispan.version}</version> </dependency> <dependency> <groupId>org.infinispan</groupId> 
-			<artifactId>infinispan-spring-boot-starter</artifactId> <version>${infinispan.starters.version}</version> 
-			</dependency -->
 
 		<!-- JDG Spring Cache -->
 		<dependency>
@@ -73,13 +67,13 @@
 
 		<dependency>
 			<groupId>org.infinispan</groupId>
-			<artifactId>infinispan-spring4-remote</artifactId>
+			<artifactId>infinispan-spring5-remote</artifactId>
 			<version>${infinispan.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.infinispan</groupId>
-			<artifactId>infinispan-spring4-embedded</artifactId>
+			<artifactId>infinispan-spring5-embedded</artifactId>
 			<version>${infinispan.version}</version>
 		</dependency>
 
@@ -90,6 +84,11 @@
 		</dependency>
 
 		<!-- Swagger docs -->
+		<dependency>
+            <groupId>org.springframework.plugin</groupId>
+            <artifactId>spring-plugin-core</artifactId>
+            <version>${spring.plugin.core}</version>
+        </dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
@@ -102,20 +101,29 @@
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
-			<artifactId>springfox-staticdocs</artifactId>
+			<artifactId>springfox-spring-webmvc</artifactId>
 			<version>${springfox.version}</version>
-			<scope>test</scope>
 		</dependency>
+
 
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<release>${java.version}</release>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.redhat.CustomerServiceJDGApplication</mainClass>
+					<jvmArguments>-Dinfinispan.deserialization.whitelist.regexps=.*</jvmArguments>
 				</configuration>
 			</plugin>
 		</plugins>

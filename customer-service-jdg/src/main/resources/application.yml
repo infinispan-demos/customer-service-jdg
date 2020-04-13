@@ -5,13 +5,9 @@ spring:
     banner-mode: 'off'
   mvc:
     favicon:
-      enabled: false
-    jmx:
-      enabled: true
-#  cache:
-#    type: infinispan
-#    infinispan:
-#      config: local-cache-config.xml
+      enabled: false   
+  jmx:
+    enabled: true
   session:
     store-type: none
 springfox:
@@ -19,9 +15,4 @@ springfox:
     swagger:
       v2:
         path: /v2/api-docs
-#infinispan:
-#  remote:
-#    enabled: true
-#    server-list: 192.168.99.100:11222
-#    client-properties: hotrod-client.properties
 

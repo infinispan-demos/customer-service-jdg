@@ -7,20 +7,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 
-import com.google.common.base.Predicate;
-
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @SpringBootApplication
 @EnableCaching
-@EnableSwagger2
+@EnableSwagger2WebMvc
 @ImportResource("classpath:infinispan-cache.xml")
 public class CustomerServiceJDGServletInitializer extends SpringBootServletInitializer {
 	
@@ -43,12 +41,8 @@ public class CustomerServiceJDGServletInitializer extends SpringBootServletIniti
     public Docket swaggerSpringMvcPlugin() {
         return new Docket(DocumentationType.SWAGGER_2)
         		.select()
-        			.paths(paths())
+        			.paths(regex("/customer.*"))
         			.build();       	        
     }
     
-    private Predicate<String> paths() {
-        return 
-            regex("/customer.*");
-      }
 }

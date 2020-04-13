@@ -1,29 +1,43 @@
 package com.redhat;
 
 import java.io.Serializable;
-import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 @SuppressWarnings("serial")
+@ApiModel(value = "Customer")
+@JsonPropertyOrder({"id","first-name","last-name","email"})
+//@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class Customer implements Serializable {
 
-	private UUID id;
+	@ApiModelProperty(value="Id", readOnly=true, position=1)
+	@JsonProperty("id")
+	private String id;
 	
-    private String firstName;
+	@ApiModelProperty(value="First Name", position=2)
+	@JsonProperty("first-name")
+	private String firstName;
+	
+	@ApiModelProperty(value="Last Name", position=3)
+	@JsonProperty("last-name")
     private String lastName;
+	
+	@ApiModelProperty(value="Email", position=4)
+	@JsonProperty("email")
     private String email;
 
-    public Customer(UUID id, String firstName, String lastName, String email) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
+	public Customer(){
+	}
     
-	public UUID getId() {
+	public String getId() {
         return id;
     }
-	
-	public void setId(UUID id) {
+
+	public void setId(String id) {
         this.id = id;
     }
 	

@@ -1,12 +1,10 @@
 package com.redhat;
 
-import java.util.UUID;
-
 public interface CustomerRepositoryCache {
 
-	    public Customer findById(UUID id);
+	    public Customer findById(String id);
 
-	    public Customer insert(UUID id, Customer c);
+	    public Customer insert(String id, Customer c);
 	    
-	    public void delete(UUID id);
+	    public void delete(String id);
 }

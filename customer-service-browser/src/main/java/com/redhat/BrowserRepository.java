@@ -3,14 +3,12 @@ package com.redhat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import org.infinispan.client.hotrod.RemoteCache;
-import org.infinispan.spring.provider.SpringRemoteCacheManager;
+import org.infinispan.spring.remote.provider.SpringRemoteCacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,7 +40,7 @@ public class BrowserRepository {
     public List<String> listIndexes(String cacheName){
     	List<String> indexes = new ArrayList<String>();
 
-    	RemoteCache<Object, Object> rc = cacheManager.getNativeCacheManager().getCache();
+    	RemoteCache<Object, Object> rc = cacheManager.getNativeCacheManager().getCache(cacheName);
        	Set<Object> keySet = rc.keySet();
        	keySet.forEach(entry -> indexes.add(entry.toString()));
     	
@@ -50,16 +48,12 @@ public class BrowserRepository {
     }
     
     public String getDataAsStringByKey(String cacheName, String key) throws JsonProcessingException{
-    	RemoteCache<Object, Object> rc = cacheManager.getNativeCacheManager().getCache();
-    	
-    	if(!rc.containsKey(UUID.fromString(key))){
-    		return null;
-    	}
+    	RemoteCache<Object, Object> rc = cacheManager.getNativeCacheManager().getCache(cacheName);
     	
     	ObjectMapper mapper = new ObjectMapper();
     	mapper.enable(SerializationFeature.INDENT_OUTPUT);
     	
-    	return mapper.writeValueAsString(rc.get(UUID.fromString(key)));
+    	return mapper.writeValueAsString(rc.get(key));
     }
     
 

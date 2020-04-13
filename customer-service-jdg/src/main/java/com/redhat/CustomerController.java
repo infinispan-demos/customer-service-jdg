@@ -4,11 +4,15 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 public class CustomerController {
@@ -16,9 +20,12 @@ public class CustomerController {
 	@Autowired
 	private CustomerRepositoryCache repository;
 	
-    @RequestMapping(method=RequestMethod.GET,value="/customer")
-    public Customer getCustomer(
-    		@RequestParam(value="id") UUID id
+    @RequestMapping(method=RequestMethod.GET,value="/customer/{id}")
+    @ApiOperation(
+            value = "Get Customer",
+			notes = "Get a Customer by id")    
+	public Customer getCustomer(
+		@PathVariable(value="id") String id
     		) {
     	Customer c = repository.findById(id);
     	
@@ -30,28 +37,36 @@ public class CustomerController {
     }
 
     @RequestMapping(method=RequestMethod.PUT,value="/customer")
+    @ApiOperation(
+            value = "Create a Customer",
+            notes = "Create a Customer serialized in JSON")
     public Customer putCustomer(
-    		@RequestParam(value="first-name") String firstName,
-    		@RequestParam(value="last-name") String lastName,
-    		@RequestParam(value="email") String email
+    		@ApiParam(value = "Customer object", required = true, name = "C145555ustomer") @RequestBody Customer c
     		) {
-    	 UUID id = UUID.randomUUID();
-         return repository.insert(id, new Customer(id,firstName, lastName, email));
+    	
+    	c.setId(UUID.randomUUID().toString());
+    	
+        return repository.insert(c.getId(), c);
     }
 
-    @RequestMapping(method=RequestMethod.DELETE,value="/customer")
-    public void deleteCustomer(@RequestParam(value="id") UUID id
+    @RequestMapping(method=RequestMethod.DELETE,value="/customer/{id}")
+    @ApiOperation(
+            value = "Delete a Customer",
+            notes = "Delete a Customer by id")
+     public void deleteCustomer(
+            @PathVariable(value="id") String id
     		) {
     	repository.delete(id);
     }
 
     
-    @RequestMapping(method=RequestMethod.POST,value="/customer")
+    @RequestMapping(method=RequestMethod.POST,value="/customer/{id}")
+    @ApiOperation(
+            value = "Update a Customer",
+            notes = "Update a Customer by id")
     public Customer updateCustomer(
-    		@RequestParam(value="id") UUID id,
-    		@RequestParam(value="first-name", required = false) String firstName,
-    		@RequestParam(value="last-name", required = false) String lastName,
-    		@RequestParam(value="email", required = false) String email
+    		@PathVariable(value="id") String id,
+    		@ApiParam(value = "Customer object", required = true, name = "Customer") @RequestBody Customer c
     		) {
     	Customer c_cache = repository.findById(id);
     	
@@ -59,17 +74,10 @@ public class CustomerController {
     		throw new CustomerNotFoundException();
        	}
     		
-        Customer c_update = repository.insert(
-        		id, new Customer(
-        				id,
-        				(firstName!=null)?firstName:c_cache.getFirstName(), 
-        				(lastName!=null)?lastName:c_cache.getLastName(), 
-        				(email!=null)?email:c_cache.getEmail())
-        		);
+        Customer c_update = repository.insert(id, c);
         
     	return c_update;
-    }
-    
+    }    
     
     @ResponseStatus(value=HttpStatus.NOT_FOUND,reason="This customer is not found in the system")
     public class CustomerNotFoundException extends RuntimeException 
