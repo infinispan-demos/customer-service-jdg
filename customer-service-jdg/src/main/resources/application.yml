@@ -2,10 +2,7 @@ server:
   port: 8080
 spring:
   main:
-    banner-mode: 'off'
-  mvc:
-    favicon:
-      enabled: false   
+    banner-mode: 'off' 
   jmx:
     enabled: true
   session:
@@ -18,8 +15,9 @@ infinispan:
     auth-username: developer
     auth-password: dIRs5cAAsHIeeRIL
     auth-realm: default
-    sasl-mechanism: PLAIN
-    marshaller: org.infinispan.commons.marshall.StringMarshaller
+    sasl-mechanism: DIGEST-MD5
+    java-serial-whitelist: .*
+#    marshaller: org.infinispan.commons.marshall.StringMarshaller
 
 
 
