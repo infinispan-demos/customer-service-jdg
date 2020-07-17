@@ -21,8 +21,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
-		<springfox.version>3.0.0-SNAPSHOT</springfox.version>
-		<infinispan.version>10.1.5.Final-redhat-00001</infinispan.version>
+		<springfox.version>3.0.0</springfox.version>
+		<infinispan.version>10.1.8.Final-redhat-00001</infinispan.version>
+		<infinispan.springboot.starter>2.2.4.Final-redhat-00001</infinispan.springboot.starter>
 		<spring.plugin.core>2.0.0.RELEASE</spring.plugin.core>
 	</properties>
 
@@ -51,6 +52,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-spring-boot-starter-remote</artifactId>
+			<version>${infinispan.springboot.starter}</version>
 		</dependency>
 
 		<dependency>
@@ -85,26 +92,10 @@
 
 		<!-- Swagger docs - Workaround with plugin -->
 		<dependency>
-            <groupId>org.springframework.plugin</groupId>
-            <artifactId>spring-plugin-core</artifactId>
-            <version>${spring.plugin.core}</version>
-        </dependency>
-		<dependency>
 			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
+			<artifactId>springfox-boot-starter</artifactId>
 			<version>${springfox.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${springfox.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-spring-webmvc</artifactId>
-			<version>${springfox.version}</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>

@@ -12,12 +12,9 @@ import org.springframework.context.annotation.ImportResource;
 
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @SpringBootApplication
 @EnableCaching
-@EnableSwagger2WebMvc
-@ImportResource("classpath:infinispan-cache.xml")
 public class CustomerServiceJDGApplication {
 	
 	static Logger logger = LoggerFactory.getLogger(CustomerServiceJDGApplication.class);
@@ -31,8 +28,8 @@ public class CustomerServiceJDGApplication {
 	}
 	
     @Bean
-    public Docket swaggerSpringMvcPlugin() {
-        return new Docket(DocumentationType.SWAGGER_2)
+    public Docket apiApp() {
+        return new Docket(DocumentationType.OAS_30)
         		.select()
         			.paths(regex("/customer.*"))
         			.build();       	        

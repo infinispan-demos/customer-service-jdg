@@ -10,9 +10,16 @@ spring:
     enabled: true
   session:
     store-type: none
-springfox:
-  documentation:
-    swagger:
-      v2:
-        path: /v2/api-docs
+infinispan:
+  remote:
+    enabled: 'true'
+    server-list: 127.0.0.1:11222
+    use-auth: true
+    auth-username: developer
+    auth-password: dIRs5cAAsHIeeRIL
+    auth-realm: default
+    sasl-mechanism: PLAIN
+    marshaller: org.infinispan.commons.marshall.StringMarshaller
+
+
 
