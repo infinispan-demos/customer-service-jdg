@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
 		<springfox.version>3.0.0</springfox.version>
-		<infinispan.version>10.1.8.Final-redhat-00001</infinispan.version>
+		<infinispan.version>11.0.6.Final</infinispan.version>
 		<infinispan.springboot.starter>2.2.4.Final-redhat-00001</infinispan.springboot.starter>
 		<spring.plugin.core>2.0.0.RELEASE</spring.plugin.core>
 	</properties>
